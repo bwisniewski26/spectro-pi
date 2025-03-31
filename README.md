@@ -13,7 +13,7 @@ Its purpose is to visualize audio spectrum gathered through built in microphones
 
 ### Parts used
 
-- Raspberry Pi 2W
+- Raspberry Pi Zero 2W
 - SPH0645LM4H - MEMS I2S microphone
 - 32x8 RGB WS2812B LED matrix 
 
