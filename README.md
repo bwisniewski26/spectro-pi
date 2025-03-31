@@ -7,7 +7,7 @@ Its purpose is to visualize audio spectrum gathered through built in microphones
 
 ### Requirements
 
-- Raspberry Pi (tested only on model 2W)
+- Raspberry Pi (tested only on model Zero 2W)
 - RaspberryPiOS
 - Python 3
 
@@ -20,6 +20,6 @@ Its purpose is to visualize audio spectrum gathered through built in microphones
 
 ### Script dependencies
 
-- Board - Common container for board base pin names. These will vary from board to board so don’t expect portability when using this module.
+- Board - Common container for board base pin names.
 - NeoPixel_SPI - Library used to control WS2812B matrix through SPI bus
 - PyAudio & NumPy - libraries used for mathematical operations on audio input
