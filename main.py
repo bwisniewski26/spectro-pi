@@ -3,6 +3,7 @@ import subprocess
 import os
 import board
 import neopixel
+import time
 
 # konfiguracja
 samplerate = 16000
@@ -93,6 +94,7 @@ try:
         os.system('clear')  # wyczyść konsolę
         print(normalized_amplitudes)
         display_amplitudes(normalized_amplitudes)
+        time.sleep(0.1)
 
 except KeyboardInterrupt:
     print("Zatrzymano.")
