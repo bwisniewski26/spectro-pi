@@ -7,6 +7,13 @@ samplerate = 16000
 frames_per_chunk = 1024
 bytes_per_sample = 4  # S32_LE
 channels = 1
+# Ustawienia diod LED
+pixel_pin = board.D12
+num_pixels = 256
+brightness = 0.1
+
+# Inicjalizacja diod LED
+pixels = neopixel.NeoPixel(pixel_pin, num_pixels, brightness=brightness, auto_write=False)
 
 cmd = [
     "arecord",
@@ -57,9 +64,7 @@ try:
 
         # Wyświetl widmo w konsoli
         os.system('clear')  # wyczyść konsolę
-        for amplitude in normalized_amplitudes:
-            bar_height = int(amplitude * 20)  # wysokość paska (max 20 znaków)
-            print("█" * bar_height)
+        print(normalized_amplitudes)
 
 except KeyboardInterrupt:
     print("Zatrzymano.")
