@@ -42,7 +42,7 @@ try:
                 if spectrum[i][j] > 0.1:
                     print(f"Pasmo {i*32+j}: {spectrum[i][j]:.2f}", end=" ")
                 else:
-                    print("Pasmo {i*32+j}: 0.00", end=" ")
+                    print(f"Pasmo {i*32+j}: 0.00", end=" ")
             print()
 
 except KeyboardInterrupt:
