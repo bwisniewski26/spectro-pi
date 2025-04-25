@@ -1,12 +1,26 @@
-import numpy as np
-import subprocess
-import os
+try:
+    import numpy as np
+    import subprocess
+    import os
+    import board
+    import neopixel
+except ImportError as e:
+    print("Nie można zaimportować wymaganych modułów. Upewnij się, że są zainstalowane.")
+    exit(1)
 
 # konfiguracja
 samplerate = 16000
 frames_per_chunk = 1024
 bytes_per_sample = 4  # S32_LE
 channels = 1
+# Ustawienia diod LED
+pixel_pin = board.D12
+num_pixels = 256
+brightness = 0.1
+
+# Inicjalizacja diod LED
+pixels = neopixel.NeoPixel(pixel_pin, num_pixels, brightness=brightness, auto_write=False)
+
 
 cmd = [
     "arecord",
@@ -60,6 +74,17 @@ try:
         for amplitude in normalized_amplitudes:
             bar_height = int(amplitude * 20)  # wysokość paska (max 20 znaków)
             print("█" * bar_height)
+        
+        # Narysuj kolory na diodach LED
+        for i in range(num_pixels):
+            # Oblicz kolor na podstawie segmentu
+            segment_index = int(i / (num_pixels / num_segments))
+            if segment_index < num_segments:
+                color_value = int(normalized_amplitudes[segment_index] * 255)
+                pixels[i] = (color_value, 0, 255 - color_value)
+
+
+        
 
 except KeyboardInterrupt:
     print("Zatrzymano.")
