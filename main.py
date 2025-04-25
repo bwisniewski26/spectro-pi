@@ -71,9 +71,7 @@ try:
 
         # Wyświetl widmo w konsoli
         os.system('clear')  # wyczyść konsolę
-        for amplitude in normalized_amplitudes:
-            bar_height = int(amplitude * 20)  # wysokość paska (max 20 znaków)
-            print("█" * bar_height)
+
         
         # Narysuj kolory na diodach LED
         for i in range(num_pixels):
