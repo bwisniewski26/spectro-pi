@@ -21,7 +21,6 @@ brightness = 0.1
 # Inicjalizacja diod LED
 pixels = neopixel.NeoPixel(pixel_pin, num_pixels, brightness=brightness, auto_write=False)
 
-
 cmd = [
     "arecord",
     "-D", "plughw:1,0",        # karta GoogleVoiceHat
@@ -66,11 +65,8 @@ try:
         segment_amplitudes[0] *= bass_reduction_factor  # zmniejszenie pierwszego segmentu
 
         # Normalizuj amplitudy do zakresu 0-1
-        max_amplitude = max(segment_amplitudes) if max(segment_amplitudes) > 0 else 1  # Zabezpieczenie przed zerem
+        max_amplitude = max(segment_amplitudes) if max(segment_amplitudes) > 0 else 1
         normalized_amplitudes = [amp / max_amplitude for amp in segment_amplitudes]
-
-        # Zabezpieczenie przed NaN w normalizowanych amplitudach
-        normalized_amplitudes = [0 if np.isnan(amp) else amp for amp in normalized_amplitudes]
 
         # Wyświetl widmo w konsoli
         os.system('clear')  # wyczyść konsolę
@@ -78,16 +74,6 @@ try:
             bar_height = int(amplitude * 20)  # wysokość paska (max 20 znaków)
             print("█" * bar_height)
 
-        # Narysuj kolory na diodach LED
-        for i in range(num_pixels):
-            # Oblicz kolor na podstawie segmentu
-            segment_index = int(i / (num_pixels / num_segments))
-            if segment_index < num_segments:
-                color_value = int(normalized_amplitudes[segment_index] * 255)
-                pixels[i] = (color_value, 0, 255 - color_value)
-
-        # Zaktualizuj diody LED
-        pixels.show()
         
 
 except KeyboardInterrupt:
