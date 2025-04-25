@@ -47,6 +47,12 @@ try:
             segment_mask = (freqs >= segment_edges[i]) & (freqs < segment_edges[i + 1])
             segment_amplitudes.append(np.sum(spectrum[segment_mask]))
 
+        # Dodaj offset na niskie tony (np. zwiększ amplitudy w pierwszym segmencie)
+        bass_boost_factor = 1.5  # współczynnik wzmocnienia niskich tonów
+        segment_amplitudes[0] *= bass_boost_factor  # wzmocnienie pierwszego segmentu
+        if num_segments > 1:
+            segment_amplitudes[1] *= bass_boost_factor * 0.8  # opcjonalnie wzmocnienie drugiego segmentu
+
         # Normalizuj amplitudy do zakresu 0-1
         max_amplitude = max(segment_amplitudes) if max(segment_amplitudes) > 0 else 1
         normalized_amplitudes = [amp / max_amplitude for amp in segment_amplitudes]
