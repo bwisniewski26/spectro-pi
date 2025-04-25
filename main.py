@@ -25,13 +25,22 @@ try:
         raw_audio = process.stdout.read(frames_per_chunk * bytes_per_sample)
         if not raw_audio:
             break
-
+        # Przygotuj obliczenie danych widma audio
+         
         samples = np.frombuffer(raw_audio, dtype=np.int32).astype(np.float32)
+        samples = samples - np.mean(samples)
         samples /= np.max(np.abs(samples))  # normalizacja
+        # Oblicz widmo
+        spectrum = np.abs(np.fft.fftfreq(len(samples), samples))[:256]
 
-        spectrum = np.abs(np.fft.fft(samples))[:256]
         spectrum = np.reshape(spectrum, (8, 32))
-        print(spectrum)
+
+        # Wyświetl na terminalu w Hz
+        for i in range(8):
+            for j in range(32):
+                freq = int((i * 32 + j) * samplerate / (2 * 256))
+                if spectrum[i][j] > 0.1:
+                    print(f"{freq} Hz: {spectrum[i][j]:.2f}")
 
 except KeyboardInterrupt:
     print("Zatrzymano.")
