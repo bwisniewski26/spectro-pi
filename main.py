@@ -1,6 +1,8 @@
 import numpy as np
 import subprocess
 import os
+import board
+import neopixel
 
 # konfiguracja
 samplerate = 16000
@@ -14,6 +16,31 @@ brightness = 0.1
 
 # Inicjalizacja diod LED
 pixels = neopixel.NeoPixel(pixel_pin, num_pixels, brightness=brightness, auto_write=False)
+
+# Metoda do mapowania indeksu kolumny do indeksu amplitudy
+def map_index_to_amplitude(index, num_segments):
+    # Mapa kolumny do segmentu
+    segment_index = index // (num_pixels // num_segments)
+    # Mapa segmentu do amplitudy
+    return segment_index
+
+# Metoda zwracająca indeksy diód LED w kolumnie
+def get_led_indices(column_index, num_segments):
+    # Oblicz indeksy diód LED w kolumnie
+    start_index = column_index * (num_pixels // num_segments)
+    end_index = start_index + (num_pixels // num_segments)
+    return list(range(start_index, end_index))
+
+# Metoda wyświetlająca amplitudy na diodach LED
+def display_amplitudes(amplitudes):
+    # Ustawienie koloru dla każdej diody LED
+    for i in range(num_pixels):
+        pixel_index = map_index_to_amplitude(i, len(amplitudes))
+        led_indices = get_led_indices(pixel_index, len(amplitudes))
+        color = int(255 * amplitudes[pixel_index])  # Przekształcenie amplitudy na kolor
+        for led_index in led_indices:
+            pixels[led_index] = (color, 0, 0)  # Ustaw kolor na czerwony
+    pixels.show()
 
 cmd = [
     "arecord",
@@ -65,6 +92,7 @@ try:
         # Wyświetl widmo w konsoli
         os.system('clear')  # wyczyść konsolę
         print(normalized_amplitudes)
+        display_amplitudes(normalized_amplitudes)
 
 except KeyboardInterrupt:
     print("Zatrzymano.")
