@@ -1,5 +1,6 @@
 import numpy as np
 import subprocess
+import os
 
 # konfiguracja
 samplerate = 16000
@@ -25,27 +26,27 @@ try:
         raw_audio = process.stdout.read(frames_per_chunk * bytes_per_sample)
         if not raw_audio:
             break
+
         # Przygotuj obliczenie danych widma audio
-         
         samples = np.frombuffer(raw_audio, dtype=np.int32).astype(np.float32)
         samples = samples - np.mean(samples)
         samples /= np.max(np.abs(samples))  # normalizacja
+
         # Oblicz widmo
-        spectrum = np.abs(np.fft.fftfreq(len(samples), samples))[:256]
+        spectrum = np.abs(np.fft.fft(samples))[:frames_per_chunk // 2]
 
-        spectrum = np.reshape(spectrum, (8, 32))
+        # Podziel widmo na 8 części
+        spectrum_chunks = np.array_split(spectrum, 8)
 
-        for i in range(8):
-            for j in range(32):
-                if spectrum[i][j] > 0.1:
+        # Wyświetl widmo
+        os.system('clear')  # wyczyść konsolę
+        for chunk in spectrum_chunks:
+            for value in chunk:
+                if value > 0.1:
                     print("█", end="")
                 else:
                     print(" ", end="")
             print()
-
-        # wyczyść konsolę
-        print(f"\033[H\033[J", end="")
-        
 
 except KeyboardInterrupt:
     print("Zatrzymano.")
