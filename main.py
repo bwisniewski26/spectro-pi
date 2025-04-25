@@ -42,6 +42,9 @@ try:
                 else:
                     print(" ", end="")
             print()
+
+        # wyczyść konsolę
+        print(f"\033[H\033[J", end="")
         
 
 except KeyboardInterrupt:
