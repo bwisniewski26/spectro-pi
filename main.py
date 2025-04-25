@@ -1,21 +1,38 @@
-# SpectroPi Python script for Raspberry Pi
+import numpy as np
+import subprocess
+
+# konfiguracja
+samplerate = 16000
+frames_per_chunk = 1024
+bytes_per_sample = 4  # S32_LE
+channels = 1
+
+cmd = [
+    "arecord",
+    "-D", "plughw:1,0",        # karta GoogleVoiceHat
+    "-f", "S32_LE",
+    "-c", str(channels),
+    "-r", str(samplerate),
+    "-t", "raw"                # raw output
+]
+
+# uruchom arecord jako proces
+process = subprocess.Popen(cmd, stdout=subprocess.PIPE, bufsize=frames_per_chunk * bytes_per_sample)
 
 try:
-    import sounddevice as sd
-    import neopixel_spi
-    import numpy as np
-except: 
-    print("Failed to import required libraries!")
-    exit(1)
+    while True:
+        # czytaj próbki z arecord
+        raw_audio = process.stdout.read(frames_per_chunk * bytes_per_sample)
+        if not raw_audio:
+            break
 
+        samples = np.frombuffer(raw_audio, dtype=np.int32).astype(np.float32)
+        samples /= np.max(np.abs(samples))  # normalizacja
 
-def audio_callback(indata, frames, time, status):
-    samples = indata[:, 0] # mono audio
-    spectrum = np.abs(np.fft.fft(samples))
-    # map to LED matrix 32x8 to show spectrum from low to high
-    spectrum = np.reshape(spectrum, (8, 32))
-    print(spectrum)
+        spectrum = np.abs(np.fft.fft(samples))[:256]
+        spectrum = np.reshape(spectrum, (8, 32))
+        print(spectrum)
 
-stream = sd.InputStream(callback=audio_callback, channels=1, samplerate=44100, blocksize=1024)
-stream.start()
-
+except KeyboardInterrupt:
+    print("Zatrzymano.")
+    process.terminate()
