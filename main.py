@@ -1,20 +1,21 @@
 # SpectroPi Python script for Raspberry Pi
 
 try:
-    import board
+    import sounddevice as sd
     import neopixel_spi
-    import pyaudio
     import numpy as np
 except: 
     print("Failed to import required libraries!")
     exit(1)
 
 
-FORMAT = pyaudio.paInt16
-CHANNELS = 1
-RATE = 16000
-CHUNK = 1024
+def audio_callback(indata, frames, time, status):
+    samples = indata[:, 0] # mono audio
+    spectrum = np.abs(np.fft.fft(samples))
+    # map to LED matrix 32x8 to show spectrum from low to high
+    spectrum = np.reshape(spectrum, (8, 32))
+    print(spectrum)
 
-audio = pyaudio.PyAudio()
+stream = sd.InputStream(callback=audio_callback, channels=1, samplerate=44100, blocksize=1024)
+stream.start()
 
-# TODO: Further script implementation
