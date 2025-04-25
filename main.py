@@ -33,20 +33,29 @@ try:
         samples /= np.max(np.abs(samples))  # normalizacja
 
         # Oblicz widmo
-        spectrum = np.abs(np.fft.fft(samples))[:frames_per_chunk // 2]
+        spectrum = np.abs(np.fft.rfft(samples))  # używamy rfft, bo dane są rzeczywiste
+        freqs = np.fft.rfftfreq(len(samples), d=1/samplerate)
 
-        # Podziel widmo na 8 części
-        spectrum_chunks = np.array_split(spectrum, 8)
+        # Podziel widmo na 8 segmentów częstotliwości
+        num_segments = 8
+        max_freq = samplerate / 2  # maksymalna częstotliwość (Nyquist)
+        segment_edges = np.linspace(0, max_freq, num_segments + 1)  # granice segmentów
 
-        # Wyświetl widmo
+        # Oblicz sumę amplitud w każdym segmencie
+        segment_amplitudes = []
+        for i in range(num_segments):
+            segment_mask = (freqs >= segment_edges[i]) & (freqs < segment_edges[i + 1])
+            segment_amplitudes.append(np.sum(spectrum[segment_mask]))
+
+        # Normalizuj amplitudy do zakresu 0-1
+        max_amplitude = max(segment_amplitudes) if max(segment_amplitudes) > 0 else 1
+        normalized_amplitudes = [amp / max_amplitude for amp in segment_amplitudes]
+
+        # Wyświetl widmo w konsoli
         os.system('clear')  # wyczyść konsolę
-        for chunk in spectrum_chunks:
-            for value in chunk:
-                if value > 0.1:
-                    print("█", end="")
-                else:
-                    print(" ", end="")
-            print()
+        for amplitude in normalized_amplitudes:
+            bar_height = int(amplitude * 20)  # wysokość paska (max 20 znaków)
+            print("█" * bar_height)
 
 except KeyboardInterrupt:
     print("Zatrzymano.")
