@@ -12,7 +12,7 @@ channels = 1
 # Ustawienia diod LED
 pixel_pin = board.D12
 num_pixels = 256
-brightness = 0.1
+brightness = 0.05
 
 # Inicjalizacja diod LED
 pixels = neopixel.NeoPixel(pixel_pin, num_pixels, brightness=brightness, auto_write=False)
@@ -33,13 +33,13 @@ def get_led_indices(column_index, num_segments):
 
 # Metoda wyświetlająca amplitudy na diodach LED
 def display_amplitudes(amplitudes):
-    # Ustawienie koloru dla każdej diody LED
+    min_brightness = 10  # Minimalna jasność (0-255)
     for i in range(num_pixels):
         pixel_index = map_index_to_amplitude(i, len(amplitudes))
         led_indices = get_led_indices(pixel_index, len(amplitudes))
-        color = int(255 * amplitudes[pixel_index])  # Przekształcenie amplitudy na kolor
+        color_intensity = max(int(amplitudes[pixel_index] * 255), min_brightness)
         for led_index in led_indices:
-            pixels[led_index] = (color, 0, 0)  # Ustaw kolor na czerwony
+            pixels[led_index] = (color_intensity, color_intensity, color_intensity)  
     pixels.show()
 
 cmd = [
