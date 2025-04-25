@@ -35,15 +35,14 @@ try:
 
         spectrum = np.reshape(spectrum, (8, 32))
 
-        # Wyświetl na moc dźwięku o danych częstotliwościach w czytelnej formie
-        print("Widmo audio:")
         for i in range(8):
             for j in range(32):
                 if spectrum[i][j] > 0.1:
-                    print(f"Pasmo {i*32+j}: {spectrum[i][j]:.2f}", end=" ")
+                    print("█", end="")
                 else:
-                    print(f"Pasmo {i*32+j}: 0.00", end=" ")
+                    print(" ", end="")
             print()
+        
 
 except KeyboardInterrupt:
     print("Zatrzymano.")
