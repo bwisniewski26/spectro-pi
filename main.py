@@ -70,8 +70,8 @@ try:
         spectrum = np.abs(np.fft.rfft(samples))  # używamy rfft, bo dane są rzeczywiste
         freqs = np.fft.rfftfreq(len(samples), d=1/samplerate)
 
-        # Podziel widmo na 8 segmentów częstotliwości
-        num_segments = 8
+        # Podziel widmo na 32 segmentów częstotliwości
+        num_segments = 32
         max_freq = samplerate / 2  # maksymalna częstotliwość (Nyquist)
         segment_edges = np.linspace(0, max_freq, num_segments + 1)  # granice segmentów
 
