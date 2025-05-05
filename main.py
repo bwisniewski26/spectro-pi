@@ -41,7 +41,7 @@ def display_amplitudes(amplitudes):
          print(led_indices)
          color_intensity = max(int(amplitudes[pixel_index] * 255), min_brightness)
          for led_index in range(num_pixels):
-            pixels[led_index] = (color_intensity, color_intensity, color_intensity)  
+            pixels[led_index] = (color_intensity, color_intensity, color_intensity)
     pixels.show()
 
 cmd = [
@@ -93,11 +93,11 @@ try:
         normalized_amplitudes = [amp / max_amplitude for amp in segment_amplitudes]
 
         # Wyświetl widmo w konsoli
-        os.system('clear')  # wyczyść konsolę
-        for amplitude in normalized_amplitudes:
-               bar_height = int(amplitude*50)
-               print("|" * bar_height)
-       # display_amplitudes(normalized_amplitudes)
+        # os.system('clear')  # wyczyść konsolę
+        # for amplitude in normalized_amplitudes:
+               # bar_height = int(amplitude*50)
+               # print("|" * bar_height)
+        display_amplitudes(normalized_amplitudes)
         time.sleep(0.1)
 
 except KeyboardInterrupt:
