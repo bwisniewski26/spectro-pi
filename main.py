@@ -9,7 +9,7 @@ matrix_width = 32
 matrix_height = 8  # Changed from 32 to 8
 num_pixels = matrix_width * matrix_height
 brightness = 0.1
-pixel_pin = board.D18
+pixel_pin = board.D12
 pixels = neopixel.NeoPixel(
     pixel_pin,
     num_pixels,
