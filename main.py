@@ -38,7 +38,7 @@ def display_amplitudes(amplitudes):
     for i in range(num_pixels):
          pixel_index = map_index_to_amplitude(i, len(amplitudes))
          led_indices = get_led_indices(pixel_index, len(amplitudes))
-         print(led_indices)
+         # print(led_indices)
          color_intensity = max(int(amplitudes[pixel_index] * 255), min_brightness)
          for led_index in range(num_pixels):
             pixels[led_index] = (color_intensity, color_intensity, color_intensity)
