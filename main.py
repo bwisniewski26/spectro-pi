@@ -14,7 +14,7 @@ channels = 1
 pixel_pin = board.D12
 num_pixels = 256
 brightness = 0.05
-
+i1 = 1
 # Inicjalizacja diod LED
 pixels = neopixel.NeoPixel(pixel_pin, num_pixels, brightness=brightness, auto_write=False)
 
@@ -36,10 +36,11 @@ def get_led_indices(column_index, num_segments):
 def display_amplitudes(amplitudes):
     min_brightness = 10  # Minimalna jasność (0-255)
     for i in range(num_pixels):
-        pixel_index = map_index_to_amplitude(i, len(amplitudes))
-        led_indices = get_led_indices(pixel_index, len(amplitudes))
-        color_intensity = max(int(amplitudes[pixel_index] * 255), min_brightness)
-        for led_index in led_indices:
+         pixel_index = map_index_to_amplitude(i, len(amplitudes))
+         led_indices = get_led_indices(pixel_index, len(amplitudes))
+         print(led_indices)
+         color_intensity = max(int(amplitudes[pixel_index] * 255), min_brightness)
+         for led_index in range(num_pixels):
             pixels[led_index] = (color_intensity, color_intensity, color_intensity)  
     pixels.show()
 
@@ -84,16 +85,19 @@ try:
 
         # Dodaj offset na niskie tony (np. zwiększ amplitudy w pierwszym segmencie)
         bass_boost_factor = 0.50  # współczynnik wzmocnienia niskich tonów
-        segment_amplitudes[0] *= bass_boost_factor  # wzmocnienie pierwszego segmentu
-
+        segment_amplitudes[0] *= bass_boost_factor * bass_boost_factor  # wzmocnienie pierwszego segmentu
+        for segment in segment_amplitudes:
+            segment +=  segment*bass_boost_factor
         # Normalizuj amplitudy do zakresu 0-1
         max_amplitude = max(segment_amplitudes) if max(segment_amplitudes) > 0 else 1
         normalized_amplitudes = [amp / max_amplitude for amp in segment_amplitudes]
 
         # Wyświetl widmo w konsoli
         os.system('clear')  # wyczyść konsolę
-        print(normalized_amplitudes)
-        display_amplitudes(normalized_amplitudes)
+        for amplitude in normalized_amplitudes:
+               bar_height = int(amplitude*50)
+               print("|" * bar_height)
+       # display_amplitudes(normalized_amplitudes)
         time.sleep(0.1)
 
 except KeyboardInterrupt:
