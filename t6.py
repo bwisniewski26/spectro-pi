@@ -77,7 +77,8 @@ def find_audio_device():
         return None
 
 def test_audio_capture(device="plughw:1,0"):
-    """Test if audio can be captured from the specified device"""
+    """Test if audio can be captured from the specified device and contains actual data"""
+    # First test if device exists and is accessible
     cmd = [
         "arecord",
         "-D", device,
@@ -91,12 +92,44 @@ def test_audio_capture(device="plughw:1,0"):
     try:
         print(f"Testing audio capture on device {device}...")
         process = subprocess.run(cmd, capture_output=True, text=True)
-        if process.returncode == 0:
-            print("Audio capture test successful!")
-            return True
-        else:
+        if process.returncode != 0:
             print(f"Audio capture test failed: {process.stderr}")
             return False
+
+        # Now test if we actually get audio data with signal
+        print("Testing for actual audio signal...")
+        cmd = [
+            "arecord",
+            "-D", device,
+            "-d", "3",  # Record for 3 seconds to get enough data
+            "-f", "S32_LE",
+            "-c", str(channels),
+            "-r", str(samplerate),
+            "-t", "raw"
+        ]
+
+        process = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        audio_data = process.stdout.read(frames_per_chunk * bytes_per_sample * 10)  # Read several frames
+        process.terminate()
+
+        if len(audio_data) < frames_per_chunk * bytes_per_sample:
+            print("No audio data received. Device might be muted or disconnected.")
+            return False
+
+        # Convert to numpy array and check if there's actual signal
+        samples = np.frombuffer(audio_data, dtype=np.int32)
+        signal_max = np.max(np.abs(samples))
+
+        print(f"Maximum audio signal: {signal_max}")
+        if signal_max < 1000:  # Arbitrary threshold for a very quiet signal
+            print("WARNING: Audio signal is very weak. Check your microphone or input source.")
+            print("The visualizer may not show much activity.")
+            # Still return True but with a warning
+            return True
+
+        print("Audio capture test successful with good signal levels!")
+        return True
+
     except Exception as e:
         print(f"Error testing audio capture: {e}")
         return False
@@ -110,12 +143,40 @@ def run_visualizer(device="plughw:1,0", debug=False):
         "-f", "S32_LE",
         "-c", str(channels),
         "-r", str(samplerate),
-        "-t", "raw"
+        "-t", "raw",
+        "--buffer-size=16384"  # Explicit buffer size to prevent underruns
     ]
 
     try:
         print(f"Starting audio capture from device {device}...")
         process = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, bufsize=frames_per_chunk * bytes_per_sample)
+
+        # Verify we're getting data immediately
+        print("Waiting for initial audio data...")
+        start_time = time.time()
+        initial_data = None
+
+        # Try for up to 5 seconds to get initial data
+        while time.time() - start_time < 5 and initial_data is None:
+            initial_data = process.stdout.read(frames_per_chunk * bytes_per_sample)
+            if not initial_data:
+                print("Waiting for audio data...")
+                time.sleep(0.5)
+
+        if not initial_data:
+            print("ERROR: No audio data received after 5 seconds!")
+            print("Possible issues:")
+            print("1. Wrong audio device selected")
+            print("2. Input source is muted")
+            print("3. Permission problems with audio device")
+            print("4. Audio subsystem issues")
+            return
+
+        print(f"Successfully receiving audio data! ({len(initial_data)} bytes)")
+
+        # Put the data back by seeking (if possible) or just use it as first frame
+        samples = np.frombuffer(initial_data, dtype=np.int32).astype(np.float32)
+        print(f"Initial audio levels: min={np.min(samples):.2f}, max={np.max(samples):.2f}")
 
         # Initialize variables for smoothing
         prev_amplitudes = [0] * matrix_width
@@ -153,14 +214,22 @@ def run_visualizer(device="plughw:1,0", debug=False):
             frame_count += 1
 
             # Skip processing if audio is too quiet
-            if np.max(np.abs(samples)) < 100:
+            audio_max = np.max(np.abs(samples))
+            if debug and frame_count % 100 == 0:
+                print(f"Current audio level: {audio_max}")
+
+            if audio_max < 100:
                 if debug and not has_displayed_data:
                     print("Audio input seems very quiet. Check your microphone or audio source.")
+                    print("If you're sure audio is playing, try increasing input volume or gain.")
                 # Still show a minimal visualization to indicate it's working
                 clear_matrix()
-                # Display a single pixel at the bottom to show it's alive
-                idx = (matrix_height - 1) * matrix_width + 0
-                pixels[idx] = (0, 0, 64)  # Dim blue
+                # Display pulsing pixels at the bottom row to show it's alive
+                t = time.time() % 2  # 2-second cycle
+                intensity = int(30 + 30 * np.sin(t * np.pi))  # Pulse between 30-60
+                for i in range(0, matrix_width, 4):  # Every fourth pixel
+                    idx = (matrix_height - 1) * matrix_width + i
+                    pixels[idx] = (0, 0, intensity)  # Dim pulsing blue
                 pixels.show()
                 time.sleep(0.1)
                 continue
@@ -260,6 +329,8 @@ if __name__ == "__main__":
     test_mode = "--test" in sys.argv
     debug_mode = "--debug" in sys.argv
     device_mode = "--list-devices" in sys.argv
+    force_mode = "--force" in sys.argv  # Skip audio testing
+    check_mode = "--check-audio" in sys.argv  # Only check audio
 
     # Get audio device from arguments if provided
     audio_device = "plughw:1,0"  # Default device
@@ -268,20 +339,57 @@ if __name__ == "__main__":
             audio_device = arg.split("=")[1]
 
     try:
+        print("Audio Visualizer for LED Matrix")
+        print("===============================")
+
         if device_mode:
             list_available_devices()
         elif test_mode:
             print("Running test pattern...")
             test_pattern()
             print("Test completed.")
-        else:
-            # Test audio before starting visualizer
+        elif check_mode:
+            # Only test audio and exit
             find_audio_device()
-            if test_audio_capture(audio_device):
+            test_audio_capture(audio_device)
+            print("Audio check completed.")
+        else:
+            # Normal operation
+            print(f"Using audio device: {audio_device}")
+            print("Use --list-devices to see all available devices")
+            print("Use --device=YOUR_DEVICE to select a specific device")
+            print("Use --check-audio to only test audio input")
+            print("Use --debug for more verbose output")
+            print("Use --force to skip audio testing")
+
+            # Show test pattern first to confirm display works
+            print("\nRunning quick display test...")
+            clear_matrix()
+            # Just flash colors briefly
+            colors = [(255, 0, 0), (0, 255, 0), (0, 0, 255)]
+            for color in colors:
+                pixels.fill(color)
+                pixels.show()
+                time.sleep(0.3)
+            clear_matrix()
+            print("Display test completed.")
+
+            # Test audio before starting visualizer (unless forced)
+            if force_mode:
+                print("\nSkipping audio tests (--force mode)")
                 run_visualizer(audio_device, debug_mode)
             else:
-                print("Audio test failed. Try running with --list-devices to see available audio devices")
-                print("Then run with --device=YOUR_DEVICE to specify a different audio device.")
+                print("\nTesting audio input...")
+                find_audio_device()
+                if test_audio_capture(audio_device):
+                    print("\nStarting visualizer...")
+                    run_visualizer(audio_device, debug_mode)
+                else:
+                    print("\nAudio test failed. You can:")
+                    print("1. Try running with --list-devices to see available audio devices")
+                    print("2. Run with --device=YOUR_DEVICE to specify a different audio device")
+                    print("3. Run with --force to skip audio testing and try anyway")
+                    print("4. Check if your microphone/line-in is properly connected and not muted")
     except Exception as e:
         print(f"Error: {e}")
     finally:
