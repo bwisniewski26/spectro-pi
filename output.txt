@@ -1,0 +1,33 @@
+Audio Visualizer for LED Matrix
+===============================
+Using audio device: plughw:1,0
+Use --list-devices to see all available devices
+Use --device=YOUR_DEVICE to select a specific device
+Use --check-audio to only test audio input
+Use --debug for more verbose output
+Use --force to skip audio testing
+
+Running quick display test...
+Display test completed.
+
+Testing audio input...
+Available audio devices:
+**** List of CAPTURE Hardware Devices ****
+card 1: sndrpigooglevoi [snd_rpi_googlevoicehat_soundcar], device 0: Google voiceHAT SoundCard HiFi voicehat-hifi-0 [Google voiceHAT SoundCard HiFi voicehat-hifi-0]
+  Subdevices: 1/1
+  Subdevice #0: subdevice #0
+
+arecord -D plughw:1,0 -d 10 -f S32_LE -c 1 -r 16000 /dev/null
+Testing audio capture on device plughw:1,0...
+Testing for actual audio signal...
+Maximum audio signal: 77135872
+Audio capture test successful with good signal levels!
+
+Starting visualizer...
+Starting audio capture from device plughw:1,0...
+Waiting for initial audio data...
+Successfully receiving audio data! (4096 bytes)
+Initial audio levels: min=-72351744.00, max=80805888.00
+Audio visualizer started. Press Ctrl+C to exit.
+Program terminated by user
+Matrix cleared

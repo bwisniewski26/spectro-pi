@@ -1,0 +1,575 @@
+    1  raspi-config
+    2  su -
+    3  su 
+    4  su
+    5  sudo su
+    6  arecord -l
+    7  arecord -D plughw:1 -c1 -r 48000 -f S32_LE -t wav -V mono -v file.wav
+    8  ls
+    9  ifconfig
+   10  ls -l
+   11  ip -a
+   12  ipa
+   13  ip a
+   14  sudo raspi-config
+   15  sudo su
+   16  cd spectro-pi/`
+   17  cd spectro-pi/
+   18  ls
+   19  python main.py 
+   20  ls
+   21  vi main.py 
+   22  clear
+   23  vi main.py 
+   24  clear
+   25  ls -la
+   26  sudo chown spectropi:spectropi -R ./*
+   27  ls
+   28  ls -la
+   29  sudo chown spectropi:spectropi -R .git/
+   30  ls -la
+   31  cd ..
+   32  ls -la
+   33  cd /root/
+   34  sudo chown spectropi:spectropi -R  ./spectro-pi/
+   35  cd spectro-pi/
+   36  vim
+   37  vi main.py 
+   38  ls -la
+   39  vi main.py 
+   40  clear
+   41  ls
+   42  man vi
+   43  clear
+   44  nano main.py 
+   45  ls
+   46  ls -la
+   47  chmod +x main.py 
+   48  ls -la
+   49  ./main.py
+   50  clear
+   51  cd 
+   52  nano .bashrc 
+   53  logout
+   54  reboot
+   55  cd spectro-pi/
+   56  nano main.py 
+   57  ./main.py 
+   58  nano main.py 
+   59  ./main.py 
+   60  nano main.py 
+   61  ./main.py 
+   62  sudo apt install neovim
+   63  nvim main.py 
+   64  cd 
+   65  sudo raspi-config 
+   66  cd spectro-pi/
+   67  nvim main.py 
+   68  nano main.py 
+   69  nvim main.py 
+   70  clear
+   71  ls
+   72  clear
+   73  cowsay
+   74  sl
+   75  fastfetch
+   76  sudo apt update
+   77  sudo apt list --upgradeable
+   78  sudo apt list --upgradeable -a
+   79  sudo apt upgrade
+   80  sudo apt search fastfetch
+   81  sudo apt install cowsay
+   82  cowsay "ale fajny projekt!"
+   83  clear
+   84  cowsay "ale fajny projekt!"
+   85  cd ..
+   86  nvim .bash
+   87  nvim .bashrc 
+   88  clear
+   89  logout
+   90  nvim .bashrc 
+   91  logout
+   92  sudo shutdown now
+   93  cd spectro-pi/
+   94  ping 8.8.8.8
+   95  nvim main.py 
+   96  pip install rpi_ws281x
+   97  pip install rpi_ws281x --break-system-packages
+   98  nvim main.py 
+   99  pip install adafruit-circuitpython-neopixel --break-system-packages
+  100  nvim main.py 
+  101  nvim test.py
+  102  chmod +x test.py 
+  103  ./test.py 
+  104  sudo ./test.py 
+  105  nvim test.py
+  106  pip install adafruit-blinka --break-system-packages
+  107  nvim test.py
+  108  sudo ./test.py 
+  109  nvim test.py
+  110  pip install --break-system-packages --force-reinstall adafruit-blinka
+  111  sudo ./test.py 
+  112  sudo pip install --break-system-packages --force-reinstall adafruit-blinka
+  113  sudo ./test.py 
+  114  nvim test.py 
+  115  sudo python3 test.py 
+  116  sudo python test.py 
+  117  nvim test.py 
+  118  sudo python test.py 
+  119  nvim test.py 
+  120  ./test.py 
+  121  sudo pip install adafruit-circuitpython-neopixel --break-system-packages
+  122  sudo pip install adafruit-circuitpython-neopixel --break-system-packages --force-reinstall
+  123  sudo ./test.py 
+  124  sudo pip3 install adafruit-circuitpython-neopixel --break-system-packages --force-reinstall
+  125  sudo ./test.py 
+  126  sudo apt-get update
+  127  sudo apt-tet upgrade -y
+  128  sudo apt-get upgrade -y
+  129  sudo apt-get install python3-pip
+  130  sudo apt install --upgrade python3-setuptools
+  131  sudo python3 raspi-blinka.py
+  132  nano main.py 
+  133  nano test.py 
+  134  sudo ./test.py 
+  135  nano test.py 
+  136  sudo ./test.py 
+  137  sudo pip install rpi_ws281x --break-system-packages --force-reinstall
+  138  wget https://raw.githubusercontent.com/adafruit/Raspberry-Pi-Installer-Scripts/master/raspi-blinka.py
+  139  sudo raspi-blinka.py
+  140  ls
+  141  sudo python3 raspi-blinka.py 
+  142  sudo pip3 install adafruit-python-shell --break-system-packages
+  143  sudo python3 raspi-blinka.py 
+  144  cd spectro-pi/
+  145  sudo ./test.py 
+  146  sudo apt-get install python3-rpi.gpio
+  147  sudo ./test.py 
+  148  gpio readall
+  149  sudo raspi-config
+  150  clear
+  151  ls
+  152  mv test.py t.py
+  153  sudo ./t.py
+  154  nano t.py 
+  155  pip 
+  156  sudo pip3 install rpi_ws281x adafruit-circutpython-neopixel
+  157  sudo pip3 install python3-rpi_ws281x python3-adafruit-circutpython-neopixel
+  158  sudo pip3 install python3-rpi_ws281x
+  159  sudo apt install pytho3-rpi_ws281x
+  160  sudo apt install python3-rpi_ws281x
+  161  apt install python3-rpi_ws281x
+  162  sudo apt install python3-rpi_ws281x
+  163  sudo pip3 install python3-rpi_ws281x python3-adafruit-circutpython-neopixel
+  164  sudo pip3 install python3-rpi_ws281x python3-adafruit-circutpython-neopixel --break-system-packages
+  165  sudo pip3 install rpi_ws281x adafruit-circutpython-neopixel --break-system-packages
+  166  sudo pip3 install rpi_ws281x adafruit-circuitpython-neopixel --break-system-packages
+  167  sudo pip3 install rpi_ws281x adafruit-circuitpython-neopixel --break-system-packages --force-reinstall
+  168  sudo pip3 uninstall neopixel
+  169  sudo pip3 uninstall neopixel --break-system-packages
+  170  sudo python3 -m pip install --force-reinstall adafruit-blinka --break-system-packages
+  171  ls
+  172  sudo ./t.py 
+  173  nano t.py
+  174  ls
+  175  sudo ./t.py 
+  176  nano t.py
+  177  sudo nano /boot/config.txt
+  178  sudo nano /boot/firmware/config.txt
+  179  sudo reboot
+  180  cd spectro-pi/
+  181  sudo ./t.py 
+  182  nano t.py 
+  183  sudo ./t.py 
+  184  nano t.py 
+  185  sudo ./t.py 
+  186  shutdown now
+  187  cd spectro-pi/
+  188  sudo ./t.py 
+  189  shutdown
+  190  shutdown now
+  191  cd spectro-pi/
+  192  sudo ./t.py 
+  193  nano t.py 
+  194  sudo ./t.py 
+  195  nano t.py 
+  196  sudo ./t.py 
+  197  shutdown now
+  198  cd spectro-pi/
+  199  sudo ./t.py 
+  200  nano t.py 
+  201  sudo ./t.py 
+  202  sudo raspi-config
+  203  sudo ./t.py 
+  204  nano t.py 
+  205  shutdown now
+  206  cd spectro-pi/
+  207  sudo ./t.py 
+  208  nano t.py 
+  209  nano t2.py
+  210  sudo python t2.py 
+  211  shutdown now
+  212  cd spectro-pi/
+  213  sudo python t2.py 
+  214  sudo ./t.py 
+  215  sudo python t2.py 
+  216  nano t2.py 
+  217  shutdown now
+  218  cd spectro-pi/
+  219  nano t2.py 
+  220  sudo python t2.py 
+  221  shutdown now
+  222  cd spectro-pi/
+  223  sudo python t2.py 
+  224  nano t2.py 
+  225  sudo python t2.py 
+  226  sudo ./main.py 
+  227  sudo ./t.py 
+  228  nano t.py
+  229  nano t2.py
+  230  nano t.py
+  231  git pull
+  232  git stash
+  233  git pull
+  234  sudo ./main.py
+  235  sudo python main.py 
+  236  clear
+  237  sudo python main.py 
+  238  git pull
+  239  sudo python main.py 
+  240  git pull
+  241  sudo python main.py 
+  242  git pull
+  243  sudo python main.py 
+  244  arecord -l
+  245  git pull
+  246  sudo python main.py 
+  247  shutdown noew
+  248  shutdown now
+  249  ls
+  250  clear
+  251  ls
+  252  clear
+  253  btop
+  254  clear
+  255  htop
+  256  shutdown now
+  257  clear
+  258  ls
+  259  clear
+  260  ls
+  261  nvim .bash
+  262  ls
+  263  nvim .bashrc
+  264  clear
+  265  ls
+  266  cd spectro-pi/
+  267  ls
+  268  ./t.py
+  269  sudo ./t.py
+  270  ls
+  271  nvim t2.py 
+  272  ls
+  273  chmod +x t2.py 
+  274  nvim t2.py 
+  275  ./t2.py 
+  276  sudo ./t2.py 
+  277  sudo ./t.py
+  278  ls
+  279  cat a.py 
+  280  nvim main.py 
+  281  ls
+  282  clear
+  283  ls
+  284  clear
+  285  ls
+  286  git s
+  287  git status
+  288  git branch
+  289  git add main.py 
+  290  sudo raspi-config 
+  291  ping 8.8.8.8
+  292  sudo main.py
+  293  nvim main.py 
+  294  chmod +x main.py 
+  295  sudo ./main.py 
+  296  ls
+  297  git pull
+  298  sudo raspi-config 
+  299  ls
+  300  git pull
+  301  git restore .
+  302  git pull
+  303  git logh
+  304  git log
+  305  ls
+  306  git stash
+  307  git pull
+  308  ping 8.8.8.8
+  309  git pull
+  310  ls -la
+  311  chmod +x main.py 
+  312  sudo ./main.py 
+  313  cat main.py 
+  314  python3 main.py 
+  315  sudo python3 main.py 
+  316  git pull
+  317  chmod -x main.py 
+  318  git pull
+  319  sudo python3 main.py 
+  320  git pull
+  321  sudo raspi-config 
+  322  git pull
+  323  sudo python3 main.py 
+  324  git pull
+  325  sudo python3 main.py 
+  326  git pull
+  327  sudo python3 main.py 
+  328  ls
+  329  sudo ./t.py 
+  330  sudo python3 main.py 
+  331  git pull
+  332  sudo python3 main.py 
+  333  git log
+  334  clear\
+  335  clear
+  336  git pull
+  337  sudo python3 main.py 
+  338  git pull
+  339  sudo python3 main.py 
+  340  git pull
+  341  sudo python3 t3.py 
+  342  sudo python3 t1.py 
+  343  sudo python3 t.py 
+  344  sudo python3 t2.py 
+  345  sudo python3 main.py 
+  346  sudo python3 t3.py 
+  347  ls
+  348  cowsay dupa
+  349  git pull
+  350  sudo python3 main.py 
+  351  sudo python3 t4.py 
+  352  sudo python3 t3.py 
+  353  git pull
+  354  sudo python3 t4.py 
+  355  git pull
+  356  sudo python3 t5.py 
+  357  sudo python3 t5.py  --test
+  358  sudo python3 t5.py  
+  359  git pull
+  360  sudo python3 t6.py 
+  361  sudo python3 t6.py --test
+  362  sudo python3 t6.py --debug
+  363  sudo python3 t6.py --list-devices
+  364  arecord -l
+  365  sudo python3 t6.py 
+  366  git pull
+  367  sudo python3 t6.py 
+  368  history | grep arecord
+  369  sudo python3 t6.py --device=plughw:1
+  370  history | grep arecord
+  371  sudo python3 t6.py --device=plughw:1,0
+  372  clear
+  373  ls
+  374  clear
+  375  shutdowm now
+  376  sudo shutdowm now
+  377  sudo shutdown now
+  378  ls
+  379  cd spectro-pi/
+  380  ls
+  381  nvim t6.py 
+  382  sudo python main.py 
+  383  ls
+  384  nvim t6.py 
+  385  ls
+  386  sudo python t6.py 
+  387  ls
+  388  nvim a.py 
+  389  ls
+  390  sudo python a.py .
+  391  ls
+  392  nvim raspi-blinka.py 
+  393  ls
+  394  clear
+  395  ls
+  396  sudo python raspi-blinka.py 
+  397  s
+  398  ls
+  399  sudo python main.py 
+  400  python
+  401  ls
+  402  nvim t6.py 
+  403  sudo python a.py 
+  404  nvim t6.py 
+  405  sudo python t6.py 
+  406  sudo python t6.py > output.txt
+  407  nvim output.txt 
+  408  arecord -D plughw:1,0 -d 10 -f S32_LE -c 1 -r 16000 /dev/null
+  409  ls
+  410  mkdir audio_output
+  411  arecord -D plughw:1,0 -d 10 -f S32_LE -c 1 -r 16000 audio_output/1.wav
+  412  ls
+  413  aplay audio_output/1.wav 
+  414  nmcli dev wifi list
+  415  man nmcli
+  416  nmcli device wifi connect motorola\ edge\ 40_8536 password skibidi1
+  417  git status
+  418  git add *
+  419  git commit -m "recorded sample audio lol"
+  420  git config user.email "tmisiak10m@gmail.com"
+  421  git config user.name "krasnykid"
+  422  git push
+  423  ls
+  424  curl https://getcroc.shollz.com 
+  425  curl https://getcroc.shollz.com | bash
+  426  ping google.com
+  427  curl https://getcroc.schollz.com | bash
+  428  ls
+  429  cd audio_output/
+  430  ls
+  431  croc send 1.wav 
+  432  ls
+  433  cd ..
+  434  ls
+  435  history 
+  436  arecord -l
+  437  alsamixer 
+  438  clear
+  439  alsamixer
+  440  ls
+  441  nvim t6.py 
+  442  ls
+  443  clear
+  444  shutdown now
+  445  ls
+  446  cd spectro-pi/
+  447  ls
+  448  nvim t6.py 
+  449  ;s
+  450  ls
+  451  python main.py 
+  452  sudo python main.py 
+  453  nvim main.py 
+  454  ls
+  455  git log
+  456  git checkout cd481
+  457  git restore .
+  458  git checkout cd481
+  459  git restore *
+  460  git checkout cd481
+  461  git status
+  462  ls
+  463  cat output.txt 
+  464  git stash
+  465  git checkout cd481
+  466  sudo python main.py 
+  467  ls
+  468  clear
+  469  ls
+  470  git branch
+  471  git switch compatibilityFix 
+  472  ls
+  473  git stash apply 
+  474  ls
+  475  clear
+  476  ./t.py 
+  477  sudo ./t.py 
+  478  ls
+  479  clear
+  480  ls
+  481  sudo python t5.py 
+  482  cat raspi-blinka.py 
+  483  git stash
+  484  git checkout 23e9
+  485  ls
+  486  sudo python main.py 
+  487  ls
+  488  nvim main.py 
+  489  git checkout f25e
+  490  git checkout f25f
+  491  sudo python main.py 
+  492  git checkout d469
+  493  git checkout b469
+  494  sudo python main.py 
+  495  ls
+  496  nvim main.py 
+  497  git checkout e5fc
+  498  sudo python main.py 
+  499  git checkout 0ff1
+  500  sudo python main.py 
+  501  git status
+  502  git checkout 7a70
+  503  sudo python main.py 
+  504  git checkout 6d8b
+  505  sudo python main.py 
+  506  git checkout 8b9
+  507  git checkout 8b9a
+  508  sudo python main.py 
+  509  git status
+  510  git checkout cd48
+  511  sudo python main.py 
+  512  history | grep arecord
+  513  arecprd -l
+  514  arecord -l
+  515  arecord 
+  516  git checkout 1336
+  517  sudo python main.py 
+  518  git checkout e5fc
+  519  sudo python main.py
+  520  sudo reboot
+  521  sudo python main.py
+  522  cd spectro-pi/
+  523  sudo python main.py
+  524  ls
+  525  nvim main.py 
+  526  ls
+  527  clear
+  528  ls
+  529  git status
+  530  git checkout compatibilityFix 
+  531  ls
+  532  git status
+  533  sudo python t6.py 
+  534  ls
+  535  nvim t6.py 
+  536  ls
+  537  sudo python t5.py 
+  538  sudo python main.py 
+  539  ls
+  540  sudo python t2.py 
+  541  sudo python t6.py --test
+  542  ls
+  543  sudo python t6.py --test
+  544  ls
+  545  sudo python a.py 
+  546  nvim a.py 
+  547  ls
+  548  clear
+  549  sudo python t.py 
+  550  ls
+  551  sl
+  552  ls
+  553  sudo python t6.py 
+  554  sudo python t6.py --test
+  555  sudo python t6.py 
+  556  history
+  557  history | grep arecord
+  558  arecord -D pughw:1,0 -d 10 -f S32_LE -c 1 -r 16000 2.wav
+  559  sudo arecord -D pughw:1,0 -d 10 -f S32_LE -c 1 -r 16000 2.wav
+  560  arecord -l
+  561  sudo arecord -D plughw:1,0 -d 10 -f S32_LE -c 1 -r 16000 2.wav
+  562  sudo raspi-config 
+  563  lss
+  564  clear
+  565  iwconfig
+  566  ifconfig 
+  567  ls
+  568  ifconfig wlan0 up
+  569  sudo ifconfig wlan0 up
+  570  history
+  571  history | less
+  572  history | more
+  573  history | 
+  574  history | more
+  575  history > history.txt

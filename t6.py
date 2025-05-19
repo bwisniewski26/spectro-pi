@@ -79,6 +79,7 @@ def find_audio_device():
 def test_audio_capture(device="plughw:1,0"):
     """Test if audio can be captured from the specified device and contains actual data"""
     # First test if device exists and is accessible
+    print(f"arecord -D {device} -d 10 -f S32_LE -c {str(channels)} -r {str(samplerate)} /dev/null")
     cmd = [
         "arecord",
         "-D", device,
