@@ -16,7 +16,7 @@ pixels = neopixel.NeoPixel(
     num_pixels,
     brightness=brightness,
     auto_write=False,
-    pixel_order=neopixel.GRB
+    pixel_order=neopixel.RGB
 )
 
 # XY to index with serpentine layout
@@ -120,18 +120,18 @@ try:
 
         # Apply frequency-dependent boosting
         # Bass boost
-        amplitudes[0] *= 4.0
-        amplitudes[1] *= 2.5
-        amplitudes[2] *= 1.5
+#        amplitudes[0] *= 4.0
+#        amplitudes[1] *= 2.5
+#        amplitudes[2] *= 1.5
 
         # Mid boost
-        for i in range(3, 10):
-            amplitudes[i] *= 1.2
+#        for i in range(3, 10):
+#            amplitudes[i] *= 1.2
 
         # Apply smoothing
-        for i in range(len(amplitudes)):
-            amplitudes[i] = smoothing_factor * prev_amplitudes[i] + (1 - smoothing_factor) * amplitudes[i]
-        prev_amplitudes = amplitudes.copy()
+#        for i in range(len(amplitudes)):
+#            amplitudes[i] = smoothing_factor * prev_amplitudes[i] + (1 - smoothing_factor) * amplitudes[i]
+#        prev_amplitudes = amplitudes.copy()
 
         # Apply gain and clamp
         gain = 0.01  # Adjust this value as needed for your audio input level
@@ -140,7 +140,7 @@ try:
         # Display on the matrix
         display_amplitudes(normalized)
 
-        time.sleep(0.02)  # 50 fps
+        time.sleep(0.016666666666666666666666666)  # 50 fps
 
 except KeyboardInterrupt:
     print("Program terminated by user")
